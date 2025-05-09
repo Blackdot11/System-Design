@@ -1,0 +1,40 @@
+#include <iostream>
+using namespace std;
+
+class singleton {
+private:
+    int value;
+    static singleton* instance;
+
+    singleton() : value(0) {}
+
+public:
+    singleton(singleton& obj) = delete;
+
+    static singleton* func() {
+        if (instance == NULL) {
+            instance = new singleton();
+        }
+        return instance;
+    }
+
+    void setvalue(int a) {
+        value = a;
+    }
+
+    void printvalue() {
+        cout << value << endl;
+    }
+};
+
+// Static instance initialization
+singleton* singleton::instance = NULL;
+
+int main() {
+    singleton* a = singleton::func();
+    a->setvalue(42);
+    a->printvalue();  // Output: 42
+
+    singleton* b = singleton::func();
+    b->printvalue();  // Output: 42, proves it's the same instance
+}
