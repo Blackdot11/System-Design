@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+class LegacyPrinter
+{
+	public :
+	void virtual print()=0;
+};
+
+class masterprinter
+{
+	private :
+	int power;
+	
+	public:
+	void masterprinting()
+	{
+		cout<<"i have the master printing";
+	}
+};
+class printdocument : public  LegacyPrinter
+{
+   private :
+   masterprinter masterprinter1;
+   public :
+   void print()
+   {
+   	 masterprinter1.masterprinting();
+   }
+};
+
+int main() {
+	LegacyPrinter* a=new printdocument();
+	a->print();
+	return 0;
+}
