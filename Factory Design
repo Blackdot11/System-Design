@@ -1,0 +1,62 @@
+ #include <iostream>
+using namespace std;
+
+class vehicle 
+{
+	 public :
+	 virtual void func()=0;
+};
+class twowheeler: public vehicle
+{
+	public :
+	void func()
+	{
+		cout<<"i am 2 wheeler";
+	}
+};
+class threewheeler: public vehicle
+{
+	public :
+	void func()
+	{
+		cout<<"i am 3 wheeler";
+	}
+};
+class factory 
+{
+    public:
+    virtual vehicle * func()=0;
+};
+class twowheelerfector : public factory
+{
+    public: 
+    vehicle * func()
+    {
+    	return new twowheeler();
+    }
+};
+class threewheelerfector : public factory 
+{
+    public: 
+    vehicle * func()
+    {
+    	return new threewheeler();
+    }
+};
+class client
+{
+	public :
+	vehicle* func(factory* input)
+	{
+		return input->func();
+	}
+};
+int main() {
+	client* a=new client();
+	vehicle* b=a->func(new twowheelerfector());
+	vehicle* c=a->func(new threewheelerfector());
+	b->func();
+	cout<<endl;
+	c->func();
+	return 0;
+}
