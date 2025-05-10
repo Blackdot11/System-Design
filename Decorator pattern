@@ -1,0 +1,63 @@
+#include <iostream>
+using namespace std;
+
+class coffee
+{
+	public :
+	void virtual func()=0;
+};
+class plaincoffee :public coffee
+{
+	public:
+	void func()
+	{
+		cout<<"it is just a plain coffee";
+	}
+};
+class coffeeDecorator :public coffee 
+{
+	protected :
+	coffee*  coffeeDecoration; 
+	
+	public:
+	coffeeDecorator (coffee * c)
+	{
+		this->coffeeDecoration=c;
+	}
+	void func()
+	{
+		coffeeDecoration->func();
+	}
+};
+class sugercoffee :public coffeeDecorator
+{
+    public:
+    sugercoffee(coffee * c): coffeeDecorator(c)
+    {
+    	
+    }
+    void func()
+    {
+    	coffeeDecoration->func();
+    	cout<<"with suger";
+    }
+};
+class milkcoffee :public coffeeDecorator
+{
+
+    public:
+    milkcoffee(coffee* c): coffeeDecorator(c)
+    {
+    	
+    }
+    void func()
+    {
+    	coffeeDecoration->func();
+    	cout<<"with mik";
+    }
+};
+int main() {
+	coffee* c=new milkcoffee(new sugercoffee(new plaincoffee()));
+	c->func();
+	return 0;
+}
