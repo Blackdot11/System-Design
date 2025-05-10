@@ -1,0 +1,63 @@
+#include <iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+class observer
+{
+	public :
+	void virtual func(int value)=0;
+};
+
+class observer1 :public observer
+{
+	private:
+	int value;
+	public:
+	void func(int value)
+	{
+		this->value=value;
+		func1();
+	}
+	void func1()
+	{
+		cout<<value;
+	}
+};
+
+class weather
+{
+	private:
+	vector<observer* >v;
+	int value;
+	public:
+	weather(int value)
+	{
+		this->value=value;
+	}
+	void addobserver(observer* obj)
+	{
+		v.push_back(obj);
+	}
+	void update(int value)
+	{
+		this->value=value;
+		notify(value);
+	}
+	void notify(int value)
+	{
+		for(auto x :v)
+		{
+			x->func(value);
+		}
+	}
+};
+
+int main() {
+	weather * a=new weather(5);
+	observer* b=new observer1(); 
+	a->addobserver(b);
+	a->update(2);
+	a->update(5);
+	a->update(30);
+	return 0;
+}
