@@ -1,6 +1,7 @@
 import java.util.*;
 
 public class Main {
+
     public static void main(String[] args) throws Exception {
 
         MovieService movieService = new MovieService();
@@ -10,7 +11,7 @@ public class Main {
         ISeatLockProvider lockProvider = new SeatLockProvider(600);
         BookingService bookingService = new BookingService(lockProvider);
         SeatAvailabilityService availabilityService =
-                new SeatAvailabilityService(bookingService, lockProvider);
+            new SeatAvailabilityService(bookingService, lockProvider);
 
         Movie movie = movieService.createMovie("Inception", 150);
         Theatre theatre = theatreService.createTheatre("PVR");
@@ -22,10 +23,10 @@ public class Main {
         User user = new User("John", "john@gmail.com");
 
         Booking booking = bookingService.createBooking(
-                user, show, screen.getSeats());
+            user, show, screen.getSeats());
 
         PaymentService paymentService =
-                new PaymentService(new DebitCardStrategy(), bookingService);
+            new PaymentService(new DebitCardStrategy(), bookingService);
 
         paymentService.processPayment(booking.getId(), user);
 
