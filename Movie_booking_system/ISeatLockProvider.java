@@ -1,4 +1,4 @@
-import java.util.List;
+import java.util.*;
 
 public interface ISeatLockProvider {
     void lockSeats(Show show, List<Seat> seats, User user) throws Exception;
